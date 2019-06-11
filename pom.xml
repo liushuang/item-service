@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.newit.microservice</groupId>
-  <artifactId>ebusiness-demo</artifactId>
+  <artifactId>ebusiness-item-service</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <parent>

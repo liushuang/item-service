@@ -31,7 +31,7 @@ public class ItemController{
 
     @RequestMapping("/item/allList")
     @ResponseBody
-    public List<Item>  itemAllList(Model model){
+    public List<Item> itemAllList(){
         return itemService.getItemAllList();
     }
 
