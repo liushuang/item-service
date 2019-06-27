@@ -7,10 +7,7 @@ import org.newit.microservice.ebusiness.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -29,10 +26,19 @@ public class ItemController{
         return result;
     }
 
-    @RequestMapping("/item/allList")
+    @RequestMapping(value = "/item/allList", method = RequestMethod.GET)
     @ResponseBody
-    public List<Item> itemAllList(){
-        return itemService.getItemAllList();
+    public List<Item> itemAllList(@RequestParam(value = "start", defaultValue = "0") int start,
+                                  @RequestParam(value = "limit", defaultValue = "0") int limit,
+                                  @RequestParam(value = "param3", defaultValue = "0") String param3){
+        System.out.println("get itemAllList" + System.currentTimeMillis() + param3);
+        List<Item> itemList = itemService.getItemAllList();
+        if(start >= 0 && limit >0){
+            if(itemList.size() >= start + limit){
+                return itemList.subList(start, start + limit);
+            }
+        }
+        return itemList;
     }
 
     @RequestMapping("/item/{itemId}")
